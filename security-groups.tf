@@ -1,4 +1,6 @@
-
+provider "aws" {
+  region = "us-east-1"
+}
 resource "aws_security_group" "Open-Security-Group" {
   name = "Open-Security-Group"
   vpc_id      = var.vpc_id
