@@ -204,7 +204,7 @@ resource "aws_security_group" "Open-Security-Group" {
     ]
   }  
     tags = {
-    Name       = "Open-Security-SG"
+    Name       = "Open-Security-SGT"
     Department = "Infrastructure"
   }
 }
