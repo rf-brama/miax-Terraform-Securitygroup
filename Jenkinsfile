@@ -32,7 +32,7 @@ pipeline {
 
         stage('Terraform plan----') {
             steps {
-               sh '/usr/local/bin/terraform plan -refresh=true -lock=false'
+               sh '/usr/local/bin/terraform plan -refresh=true'
             } //steps
         }  //stage
         
