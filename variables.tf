@@ -4,5 +4,5 @@ variable "region" {
 }
 variable "vpc_id" {
   type = string
-  default = "vpc-06576108ad947c04a"
+  default = "vpc-0b4cba11eaa653fba"
 }
