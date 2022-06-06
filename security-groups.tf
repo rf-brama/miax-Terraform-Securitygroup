@@ -1,9 +1,18 @@
 provider "aws" {
   region = "us-east-1"
 }
+
+data "terraform_remote_state" "remote" {
+  backend = "s3"
+  config = {
+    bucket = "miax-state-files"
+    key = "VPC/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
 resource "aws_security_group" "Open-Security-Group" {
   name = "Open-Security-Group"
-  vpc_id      = var.vpc_id
+  vpc_id      = "${data.terraform_remote_state.remote.outputs.module_vpc3_vpc_id}"
 
   ingress {
     from_port = 22
@@ -210,7 +219,7 @@ resource "aws_security_group" "Open-Security-Group" {
 }
 resource "aws_security_group" "DB-Security-Group" {
   name = "DB-Security-Group"
-  vpc_id      = var.vpc_id
+  vpc_id      = "${data.terraform_remote_state.remote.outputs.module_vpc3_vpc_id}"
     ingress {
     from_port = 3306
     to_port   = 3306
@@ -236,7 +245,7 @@ resource "aws_security_group" "DB-Security-Group" {
 }
 resource "aws_security_group" "this" {
   name_prefix = "Kafka-Security-Group"
-  vpc_id      = var.vpc_id
+  vpc_id      = "${data.terraform_remote_state.remote.outputs.module_vpc3_vpc_id}"
     tags = {
     Name       = "kafka-Security-SG"
     Department = "Infrastructure"
